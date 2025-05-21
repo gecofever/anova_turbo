@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+    <!-- IMPORTS CSS -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- IMPORTS JS -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+
+    <!-- MATERIAL ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+    <title>Anova</title>
+  </head>
+  <body>
+    <div class="floatingButtons">
+      <button id="openForm">
+        <i class="material-icons">edit</i>
+      </button>
+
+      <input
+        class="hidden"
+        type="file"
+        id="fileInput"
+        accept=".xlsx"
+        multiple
+      />
+      <button id="addPage">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
+
+    <section>
+      <div class="home">
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input-no-margin home-title"
+        >
+          PESQUISA DE OPINIÃO PÚBLICA<br />SOBRE<br />ASSUNTOS
+          POLÍTICOS/ADMINISTRATIVOS
+        </div>
+        <span
+          class="home-subtitle cityValue"
+        >
+          cidade
+        </span>
+        <div class="backgroundHome"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="home">
+        <div class="backgroundSecondPage"></div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="copyright">
+        <span id="copyrightValue"
+          >Pesquisa interna. Essa pesquisa não pode ser publicada ou divulgada.
+        </span>
+      </div>
+      <div class="a4">
+        <h1
+          class="title"
+          contenteditable="true"
+        >ESPECIFICAÇÕES TÉCNICAS DA PESQUISA</h1>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          OBJETIVO - Levantar junto a população da área em estudo opiniões
+          relacionadas a assuntos políticos/administrativos.
+        </p>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >LOCAL - <span class="cityValue">cidade</span>.</p>
+
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input"
+        >
+          PERÍODO DE CAMPO - Dia .
+        </div>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          UNIVERSO - A pesquisa foi realizada com pessoas de 16 anos ou mais da
+          área em estudo.
+        </p>
+
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input"
+        >
+          AMOSTRA - Foram realizadas amostras representativas da população em estudo, estratificada com alocação proporcional à população de cada estrato.
+          Os estratos considerados foram os setores censitários. Dentro de cada estrato foram selecionadas amostras probabilísticas de conglomerado em 3
+          estágios. No primeiro estágio fez-se um sorteio probabilísticos dos setores censitários pesquisados, pelo método da probabilidade proporcional ao
+          tamanho(PPT), tomando a população de cada setor censitário, como base para tal seleção. No segundo estágio, dentro dos setores sorteados foram
+          selecionados aleatoriamente as ruas e/ou sítios onde as entrevistas foram realizadas. Finalmente, no terceiro estágio, dentro das ruas e/ou sítios
+          selecionadas, os entrevistados foram selecionados segundo cotas de variáveis descritas abaixo:
+        </div>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          SEXO - Masculino e Feminino – Dados do Tribunal Superior
+          Eleitoral-TSE.
+        </p>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          GRUPO DE IDADE - 16-24, 25-34, 35-44, 45-59, 60 anos e mais – Dados do
+          Tribunal Superior Eleitoral-TSE.
+        </p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4">
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          LOCALIZAÇÃO GEOGRÁFICA - Município de
+          <span class="cityValue">cidade</span> – Dados do IBGE.
+        </p>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          NÚMERO DE ENTREVISTAS - Foram realizadas
+          <span id="numberInterviewsValue">0</span> entrevistas.
+        </p>
+
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input"
+        >
+          INTERVALO DE CONFIANÇA/ MARGEM DE ERRO - O intervalo de confiança
+          estimado é de 95,0% e a margem de erro máxima estimada é de 3,0%
+          pontos percentuais para mais ou para menos sobre os resultados
+          encontrados no total da amostra e uma estimativa de proporcionalidade
+          (p e 1-p) estimada em 6,5%.
+        </div>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          COLETA DE DADOS - Entrevistas pessoais com utilização de questionário
+          elaborado de acordo com os objetivos da pesquisa. - As entrevistas
+          foram realizadas por uma equipe de entrevistadores da ANOVA -
+          Inovação e Inteligência em Pesquisa Ltda., devidamente
+          treinada para abordagem deste tipo de público.
+        </p>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          CONTROLE DE QUALIDADE - Houve filtragem em todos os questionários após
+          a realização das entrevistas. - Fiscalização em aproximadamente 20%
+          dos questionários.
+        </p>
+      </div>
+    </section>
+
+    <section class="container" id="results-teste">
+      <div class="a4">
+        <h1
+          class="title"
+          contenteditable="true"
+        >APRESENTAÇÃO DOS RESULTADOS</h1>
+
+        <p
+          contenteditable="true"
+          class="multiline-input"
+        >
+          PARA EFEITO DE TABULAÇÃO FORAM CONSIDERADAS AS SEGUINTES VARIÁVEIS:
+        </p>
+
+        <ul>
+          <li
+            contenteditable="true"
+            class="multiline-input"
+          >TOTAL</li>
+          <br />
+          <li
+            contenteditable="true"
+            class="multiline-input"
+          >
+            SEXO - Masculino e Feminino - Dados do Tribunal Superior
+            Eleitoral-TSE.
+          </li>
+          <br />
+          <li
+            contenteditable="true"
+            class="multiline-input"
+          >
+            GRUPO DE IDADE - 16 a 24 anos, 25 a 34 anos, 35 a 44 anos, 45 a 59
+            anos e 60 anos<br />
+            e mais - Dados do Tribunal Superior Eleitoral-TSE.
+          </li>
+          <br />
+          <li
+            contenteditable="true"
+            class="multiline-input"
+          >
+            ESCOLARIDADE - Analfabeto/Lê e Escreve, Fundamental completo ou
+            Incompleto,<br />
+            Ensino Médio completo ou incompleto e Superior completo ou
+            incompleto.
+          </li>
+          <br />
+          <li
+            contenteditable="true"
+            class="multiline-input"
+          >RENDA FAMILIAR - Até 1 S.M., De 1 a 3 S.M. e mais de 3 S.M.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container" id="results-02">
+      <div class="a4">
+        <button onclick="document.getElementById('results-02').style.display = 'none'" class="delete-button material-icons">delete</button>
+        <h1
+          class="title"
+          contenteditable="true"
+        >APRESENTAÇÃO DOS RESULTADOS</h1>
+
+        <ul>
+          <li
+            style="margin-bottom: 32px"
+            contenteditable="true"
+            class="multiline-input"
+          >
+            ZONA - Urbana e Rural.
+          </li>
+          <li
+            style="margin-bottom: 32px"
+            contenteditable="true"
+            class="multiline-input"
+          >
+            LOCALIDADES RURAIS - N/A.
+          </li>
+          <li
+            style="margin-bottom: 32px"
+            contenteditable="true"
+            class="multiline-input"
+          >
+            BAIRROS - N/A.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4">
+        <h1 class="title-sample-profile">PERFIL DA AMOSTRA</h1>
+
+        <div class="sample-profile">
+          <button id="sample-profile" type="button">Adicionar</button>
+          <section id="sampleProfileSection"></section>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4 results-presentation">
+        <div class="results-presentation-title">
+          <h1
+            contenteditable="true"
+          >Apresentação dos resultados</h1>
+          <p>Tabelas e gráficos</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tableSection"></section>
+
+    <section id="chartSection"></section>
+
+    <section class="container">
+      <div class="a4 lastPage"></div>
+    </section>
+
+    <div id="floatingForm" style="max-width: 900px; width: 90vw; margin: 0 auto; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column;">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <div style="flex: 1 1 45%; min-width: 350px;">
+          <div class="table-headers-section">
+            <h3>Tabela 1</h3>
+            <div class="headers-container" id="headers-container-1">
+              <div class="header-item">
+                <input type="text" value="Discriminação" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked disabled />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Total" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Sexo" class="header-text" />
+                <input type="number" value="2" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Faixa etária" class="header-text" />
+                <input type="number" value="5" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Escolaridade" class="header-text" />
+                <input type="number" value="4" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Renda familiar" class="header-text" />
+                <input type="number" value="3" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1 1 45%; min-width: 350px; display: flex; flex-direction: column; justify-content: stretch;">
+          <div class="table-headers-section" style="height: 100%;">
+            <h3>Tabela 2</h3>
+            <div class="headers-container" id="headers-container-2">
+              <div class="header-item">
+                <input type="text" value="Discriminação" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked disabled />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Zona" class="header-text" />
+                <input type="number" value="2" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Localidades rurais" class="header-text" />
+                <input type="number" value="16" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1 1 45%; min-width: 350px;">
+          <div class="table-headers-section">
+            <h3 style="display: flex; align-items: center; gap: 8px;">Tabela 3
+              <input type="checkbox" id="show-table-3-config" style="margin-left: 8px;" /> Exibir
+            </h3>
+            <div class="headers-container" id="headers-container-3">
+              <div class="header-item">
+                <input type="text" value="Discriminação" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked disabled />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Título" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1 1 45%; min-width: 350px;">
+          <div class="table-headers-section">
+            <h3 style="display: flex; align-items: center; gap: 8px;">Tabela 4
+              <input type="checkbox" id="show-table-4-config" style="margin-left: 8px;" /> Exibir
+            </h3>
+            <div class="headers-container" id="headers-container-4">
+              <div class="header-item">
+                <input type="text" value="Discriminação" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked disabled />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Título" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1 1 45%; min-width: 350px;">
+          <div class="table-headers-section">
+            <h3 style="display: flex; align-items: center; gap: 8px;">Tabela 5
+              <input type="checkbox" id="show-table-5-config" style="margin-left: 8px;" /> Exibir
+            </h3>
+            <div class="headers-container" id="headers-container-5">
+              <div class="header-item">
+                <input type="text" value="Discriminação" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked disabled />
+              </div>
+              <div class="header-item">
+                <input type="text" value="Título" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" checked />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+              <div class="header-item">
+                <input type="text" value="" class="header-text" />
+                <input type="number" value="1" class="header-colspan" />
+                <input type="checkbox" class="header-selected" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form id="editForm">
+        <div style="display: flex; gap: 16px; width: 100%;">
+          <label for="city" style="flex: 1;">
+            <p>Cidade</p>
+            <input type="text" id="city" placeholder="Ex: Cabaceiras - PB" style="width: 100%;" />
+          </label>
+
+          <label for="numberInterviews" style="flex: 1;">
+            <p>Número de entrevistas:</p>
+            <input type="text" id="numberInterviews" placeholder="Ex: 300" style="width: 100%;" /></label>
+        </div>
+
+        <label for="copyright">
+          <p>Marca d'água:</p>
+          <input
+            type="text"
+            id="copyright"
+            value="Pesquisa interna. Essa pesquisa não pode ser publicada ou divulgada."
+            style="width: 100%;"
+          />
+        </label>
+
+
+        <div style="display: flex; gap: 16px;">
+          <button type="button" id="closeForm" style="flex: 1; border-radius: 3px;">Fechar</button>
+          <button type="button" id="saveChanges" style="flex: 1; border-radius: 3px;">Salvar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="table-options" class="hidden">
+      <form action="" id="select-table">
+        <svg
+          id="close-table-options"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="rgba(224,30,54,1)"
+        >
+          <path
+            d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
+          ></path>
+        </svg>
+
+        <div class="buttons">
+          <div class="table-buttons">
+            <button type="button" id="model1">Adicionar</button>
+          </div>
+          <div class="chart-buttons">
+            <div class="radio-button">
+              <input name="chartType" type="radio" checked="true" value="Bar" />
+              <p>Gráfico de barras</p>
+            </div>
+            <div class="radio-button">
+              <input name="chartType" type="radio" value="Pie" />
+              <p>Gráfico de pizza</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div id="chart-options" class="hidden">
+      <div action="" id="select-chart">
+        <svg
+          id="close-chart-options"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="rgba(224,30,54,1)"
+        >
+          <path
+            d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
+          ></path>
+        </svg>
+
+        <button type="button" id="bar-chart">Barra</button>
+        <button type="button" id="pie-chart">Pizza</button>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="/main.js"></script>
+</html>

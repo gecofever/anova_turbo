@@ -1,0 +1,21 @@
+{
+    "name": "schedule",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "prettier": "^3.2.5",
+        "vite": "^5.1.1"
+    },
+    "dependencies": {
+        "chart.js": "^4.4.2",
+        "chartjs-plugin-datalabels": "^2.2.0",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2"
+    }
+}
