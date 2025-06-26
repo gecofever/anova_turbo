@@ -15,14 +15,14 @@ export async function addFirstTable(filteredData, options, subheader, tableTitle
     'Discriminação',
     'Total',
     'MAS', 'FEM',
-    '16 a 24', '25 a 34', '35 a 44', '45 a 59', '60 e mais',
-    'Analfabeto/Lê e Escreve', 'Ensino Fundamental', 'Ensino Médio', 'Ensino Superior',
+    'Até 19', '20 a 29 anos', '30 a 29 anos', '40 a 49 anos', '50 a 59 anos', '60 ou mais anos',
+    'Analfabeto', '1º Grau', '2º Grau', 'Superior',
     'Até 1 S.M.', 'De 1 a 3 S.M.', 'Mais de 3 S.M.'
   ];
 
   // Obter os cabeçalhos personalizados
   let headers = getTableHeaders();
-  
+
   // Filtrar apenas os cabeçalhos selecionados
   headers = headers.filter(h => h.selected);
 
@@ -56,7 +56,7 @@ export async function addFirstTable(filteredData, options, subheader, tableTitle
 
     // Primeira linha do cabeçalho
     const firstRow = document.createElement('tr');
-    
+
     // Adicionar Discriminação e Total primeiro
     discrimTotalHeaders.forEach(header => {
       const th = document.createElement('th');
@@ -82,8 +82,8 @@ export async function addFirstTable(filteredData, options, subheader, tableTitle
       // Mapear os títulos de cada grupo
       const groupTitles = {
         'Sexo': ['MAS', 'FEM'],
-        'Faixa etária': ['16 a 24', '25 a 34', '35 a 44', '45 a 59', '60 e mais'],
-        'Escolaridade': ['Analfabeto/Lê e Escreve', 'Ensino Fundamental', 'Ensino Médio', 'Ensino Superior'],
+        'Faixa etária': ['Até 19', '20 a 29 anos', '30 a 29 anos', '40 a 49 anos', '50 a 59 anos', '60 ou mais anos'],
+        'Escolaridade': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
         'Renda familiar': ['Até 1 S.M.', 'De 1 a 3 S.M.', 'Mais de 3 S.M.']
       };
       otherHeaders.forEach(header => {
@@ -124,8 +124,8 @@ export async function addFirstTable(filteredData, options, subheader, tableTitle
 
       // Adicionar a coluna Discriminação (opção)
       const tdDiscrim = document.createElement('td');
-      const optionText = pageOptions[i] === 'Soma' || pageOptions[i] === 'SOMA' || pageOptions[i] === 'soma' 
-        ? 'Total' 
+      const optionText = pageOptions[i] === 'Soma' || pageOptions[i] === 'SOMA' || pageOptions[i] === 'soma'
+        ? 'Total'
         : pageOptions[i];
       tdDiscrim.textContent = optionText;
       tr.appendChild(tdDiscrim);
