@@ -83,6 +83,10 @@ export async function addFirstTable(filteredData, options, subheader, tableTitle
       const groupTitles = {
         'Sexo': ['MAS', 'FEM'],
         'Faixa etária': ['Até 19', '20 a 29 anos', '30 a 29 anos', '40 a 49 anos', '50 a 59 anos', '60 ou mais anos'],
+        'Graú de Instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
+        'Graú de instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
+        'Grau de Instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
+        'Grau de instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
         'Escolaridade': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
         'Renda familiar': ['Até 1 S.M.', 'De 1 a 3 S.M.', 'Mais de 3 S.M.']
       };
