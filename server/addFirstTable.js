@@ -79,26 +79,19 @@ export async function addFirstTable(filteredData, options, subheader, tableTitle
     // Segunda linha do cabeçalho (apenas para cabeçalhos com rowspan = 1)
     if (otherHeaders.some(h => h.rowspan === 1)) {
       const secondRow = document.createElement('tr');
-      // Mapear os títulos de cada grupo
-      const groupTitles = {
-        'Sexo': ['MAS', 'FEM'],
-        'Faixa etária': ['Até 19', '20 a 29 anos', '30 a 29 anos', '40 a 49 anos', '50 a 59 anos', '60 ou mais anos'],
-        'Graú de Instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
-        'Graú de instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
-        'Grau de Instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
-        'Grau de instrução': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
-        'Escolaridade': ['Analfabeto', '1º Grau', '2º Grau', 'Superior'],
-        'Renda familiar': ['Até 1 S.M.', 'De 1 a 3 S.M.', 'Mais de 3 S.M.']
-      };
+      // Gerar subheaders para todos os headers com colspan > 1 (exceto Discriminação)
+      let subheaderOffset = 2; // Começar após Discriminação e Total
       otherHeaders.forEach(header => {
-        if (header.rowspan === 1) {
-          const titles = groupTitles[header.text] || [];
+        if (header.colspan > 1) {
           for (let i = 0; i < header.colspan; i++) {
             const th = document.createElement('th');
             th.className = 'headerChild';
-            th.textContent = titles[i] || '';
+            th.textContent = subheader[subheaderOffset + i] || '';
             secondRow.appendChild(th);
           }
+          subheaderOffset += header.colspan;
+        } else {
+          subheaderOffset += 1;
         }
       });
       thead.appendChild(secondRow);
