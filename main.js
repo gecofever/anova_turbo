@@ -498,3 +498,7 @@ export function addNewPage(tableTitle, isSampleProfile) {
   return a4;
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+  saveChanges();
+});
+
