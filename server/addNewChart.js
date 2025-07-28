@@ -139,7 +139,7 @@ const addNewChart = (opcoes, pontos, title, type) => {
             display: false
           },
           min: 0,
-          max: 100,
+          max: 200,
         }
       },
     },
