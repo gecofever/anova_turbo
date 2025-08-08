@@ -38,7 +38,7 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
     if (h.text === 'Zona') {
       hasZona = true;
     }
-    if (h.text === 'Localidades rurais') {
+    if (h.text === 'Localidades rurais' || h.text === 'Sitios') {
       hasRurais = true;
     }
   });
