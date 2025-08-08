@@ -3,12 +3,19 @@ import { addSecondTable } from "./addSecondTable.js";
 import { getTableHeaders } from "../main.js";
 
 let tableCounter = 1;
+let lastTableNumberTitle = '';
+
+export function getLastTableNumberTitle() {
+  return lastTableNumberTitle;
+}
 
 export async function addFirstTable(filteredData, options, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
   const maxRowsPerPage = 20;
   let rowsProcessed = 0;
   let currentPage = 1;
   let tableNumberTitle = `Tabela ${tableCounter}: ${tableTitle}`;
+  // Disponibiliza o título para as demais tabelas deste arquivo
+  lastTableNumberTitle = tableNumberTitle;
   let lastSection = null;
 
   const columnTitles = [

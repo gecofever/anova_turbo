@@ -1,6 +1,6 @@
 import addNewChart from './server/addNewChart.js'
 import { saveChanges } from './server/saveChanges.js'
-import { addFirstTable } from "./server/addFirstTable.js"
+import { addFirstTable, getLastTableNumberTitle } from "./server/addFirstTable.js"
 
 const openFormButton = document.getElementById('openForm')
 const addPageButton = document.getElementById('addPage')
@@ -118,9 +118,6 @@ const table2 = document.getElementById('table2')
 //     fileInput.isBar = false
 //     fileInput.isPie = true
 //   }
-//
-//   fileInput.isSecondTable = true
-//   fileInput.click()
 // })
 
 function getNumberOfColumnsFromHeaders() {
@@ -232,17 +229,17 @@ async function addTableFromWorkbook(buffer, isSecondTable, isSampleProfile) {
   // Adicionar extra table se o checkbox estiver marcado
   if (localStorage.getItem('showTable3') === '1') {
     const module = await import('./server/addExtraTable.js');
-    lastSection = module.addExtraTable(filteredData, subheader, tableTitle, valuesArray, isSampleProfile, 3, lastSection) || lastSection;
+    lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 3, lastSection) || lastSection;
   }
   // Adicionar tabela 4 se o checkbox estiver marcado
   if (localStorage.getItem('showTable4') === '1') {
     const module = await import('./server/addExtraTable.js');
-    lastSection = module.addExtraTable(filteredData, subheader, tableTitle, valuesArray, isSampleProfile, 4, lastSection) || lastSection;
+    lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 4, lastSection) || lastSection;
   }
   // Adicionar tabela 5 se o checkbox estiver marcado
   if (localStorage.getItem('showTable5') === '1') {
     const module = await import('./server/addExtraTable.js');
-    lastSection = module.addExtraTable(filteredData, subheader, tableTitle, valuesArray, isSampleProfile, 5, lastSection) || lastSection;
+    lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 5, lastSection) || lastSection;
   }
 
   // Adicionar gráfico após todas as tabelas
