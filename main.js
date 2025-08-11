@@ -25,9 +25,12 @@ const tableHeaderNumber = document.getElementById('tableHeaderNumber');
 const showTable3Checkbox = document.getElementById('show-table-3-config');
 const headersSection3 = document.querySelector('.table-headers-section:nth-child(4)');
 
-// Adicionar lógica para mostrar/ocultar Tabela 4 e 5 conforme checkbox
+// Adicionar lógica para mostrar/ocultar tabelas conforme checkbox
 const showTable4Checkbox = document.getElementById('show-table-4-config');
 const showTable5Checkbox = document.getElementById('show-table-5-config');
+const showTable6Checkbox = document.getElementById('show-table-6-config');
+const showTable7Checkbox = document.getElementById('show-table-7-config');
+const showTable8Checkbox = document.getElementById('show-table-8-config');
 
 // Função para salvar o estado do checkbox
 function saveShowTable3State() {
@@ -61,6 +64,26 @@ function saveShowTable5State() {
   localStorage.setItem('showTable5', showTable5Checkbox.checked ? '1' : '0');
 }
 
+function saveShowTable6State() { localStorage.setItem('showTable6', showTable6Checkbox.checked ? '1' : '0'); }
+function saveShowTable7State() { localStorage.setItem('showTable7', showTable7Checkbox.checked ? '1' : '0'); }
+function saveShowTable8State() { localStorage.setItem('showTable8', showTable8Checkbox.checked ? '1' : '0'); }
+
+function restoreShowTable6State() {
+  const state = localStorage.getItem('showTable6');
+  showTable6Checkbox.checked = state === '1';
+  document.getElementById('headers-container-6').style.display = showTable6Checkbox.checked ? 'block' : 'none';
+}
+function restoreShowTable7State() {
+  const state = localStorage.getItem('showTable7');
+  showTable7Checkbox.checked = state === '1';
+  document.getElementById('headers-container-7').style.display = showTable7Checkbox.checked ? 'block' : 'none';
+}
+function restoreShowTable8State() {
+  const state = localStorage.getItem('showTable8');
+  showTable8Checkbox.checked = state === '1';
+  document.getElementById('headers-container-8').style.display = showTable8Checkbox.checked ? 'block' : 'none';
+}
+
 // Função para restaurar o estado do checkbox
 function restoreShowTable4State() {
   const state = localStorage.getItem('showTable4');
@@ -74,6 +97,10 @@ function restoreShowTable5State() {
   showTable5Checkbox.checked = state === '1';
   document.getElementById('headers-container-5').style.display = showTable5Checkbox.checked ? 'block' : 'none';
 }
+
+showTable6Checkbox?.addEventListener('change', () => { saveShowTable6State(); document.getElementById('headers-container-6').style.display = showTable6Checkbox.checked ? 'block' : 'none'; });
+showTable7Checkbox?.addEventListener('change', () => { saveShowTable7State(); document.getElementById('headers-container-7').style.display = showTable7Checkbox.checked ? 'block' : 'none'; });
+showTable8Checkbox?.addEventListener('change', () => { saveShowTable8State(); document.getElementById('headers-container-8').style.display = showTable8Checkbox.checked ? 'block' : 'none'; });
 
 // Listener para salvar e exibir/ocultar ao clicar
 showTable4Checkbox.addEventListener('change', () => {
@@ -90,6 +117,9 @@ showTable5Checkbox.addEventListener('change', () => {
 // Restaurar ao abrir o formulário
 restoreShowTable4State();
 restoreShowTable5State();
+restoreShowTable6State();
+restoreShowTable7State();
+restoreShowTable8State();
 
 // Ao salvar, também salva o estado dos novos checkboxes
 saveChangesButton.addEventListener('click', () => {
@@ -97,6 +127,9 @@ saveChangesButton.addEventListener('click', () => {
   saveShowTable3State();
   saveShowTable4State();
   saveShowTable5State();
+  saveShowTable6State();
+  saveShowTable7State();
+  saveShowTable8State();
   floatingForm.classList.add('hidden');
 });
 
@@ -126,7 +159,10 @@ function getNumberOfColumnsFromHeaders() {
     'headers-container-2',
     'headers-container-3',
     'headers-container-4',
-    'headers-container-5'
+    'headers-container-5',
+    'headers-container-6',
+    'headers-container-7',
+    'headers-container-8'
   ];
   const valuesArray = [];
   containers.forEach(id => {
@@ -240,6 +276,21 @@ async function addTableFromWorkbook(buffer, isSecondTable, isSampleProfile) {
   if (localStorage.getItem('showTable5') === '1') {
     const module = await import('./server/addExtraTable.js');
     lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 5, lastSection) || lastSection;
+  }
+  // Adicionar tabela 6 se o checkbox estiver marcado
+  if (localStorage.getItem('showTable6') === '1') {
+    const module = await import('./server/addExtraTable.js');
+    lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 6, lastSection) || lastSection;
+  }
+  // Adicionar tabela 7 se o checkbox estiver marcado
+  if (localStorage.getItem('showTable7') === '1') {
+    const module = await import('./server/addExtraTable.js');
+    lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 7, lastSection) || lastSection;
+  }
+  // Adicionar tabela 8 se o checkbox estiver marcado
+  if (localStorage.getItem('showTable8') === '1') {
+    const module = await import('./server/addExtraTable.js');
+    lastSection = module.addExtraTable(filteredData, subheader, getLastTableNumberTitle(), valuesArray, isSampleProfile, 8, lastSection) || lastSection;
   }
 
   // Adicionar gráfico após todas as tabelas
@@ -407,6 +458,9 @@ function renderAllHeaderBlocks() {
   renderHeaderItems('headers-container-3', 'tableHeaders3');
   renderHeaderItems('headers-container-4', 'tableHeaders4');
   renderHeaderItems('headers-container-5', 'tableHeaders5');
+  renderHeaderItems('headers-container-6', 'tableHeaders6');
+  renderHeaderItems('headers-container-7', 'tableHeaders7');
+  renderHeaderItems('headers-container-8', 'tableHeaders8');
 }
 
 // Função para obter os cabeçalhos da tabela do formulário de um container
@@ -443,6 +497,9 @@ function saveAllTableHeaders() {
   localStorage.setItem('tableHeaders3', JSON.stringify(getTableHeadersFromContainer('headers-container-3')));
   localStorage.setItem('tableHeaders4', JSON.stringify(getTableHeadersFromContainer('headers-container-4')));
   localStorage.setItem('tableHeaders5', JSON.stringify(getTableHeadersFromContainer('headers-container-5')));
+  localStorage.setItem('tableHeaders6', JSON.stringify(getTableHeadersFromContainer('headers-container-6')));
+  localStorage.setItem('tableHeaders7', JSON.stringify(getTableHeadersFromContainer('headers-container-7')));
+  localStorage.setItem('tableHeaders8', JSON.stringify(getTableHeadersFromContainer('headers-container-8')));
 }
 
 // Função para carregar todos os headers

@@ -263,11 +263,22 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
   }
 
   if (isSecondTable) {
-    for (let i = 2; i <= 10; i++) {
-      if (valuesArray[i] === 0) {
+    for (let i = 2; i <= 8; i++) {
+      const showMap = {
+        2: true, // Tabela 2 está ativa neste fluxo
+        3: localStorage.getItem('showTable3') === '1',
+        4: localStorage.getItem('showTable4') === '1',
+        5: localStorage.getItem('showTable5') === '1',
+        6: localStorage.getItem('showTable6') === '1',
+        7: localStorage.getItem('showTable7') === '1',
+        8: localStorage.getItem('showTable8') === '1',
+      };
+      if (valuesArray[i - 1] === 0) {
         return lastSection;
       }
-      lastSection = addExtraTable(data, subheader, tableTitle, valuesArray, isSampleProfile, i, lastSection) || lastSection;
+      if (showMap[i]) {
+        lastSection = addExtraTable(data, subheader, tableTitle, valuesArray, isSampleProfile, i, lastSection) || lastSection;
+      }
     }
   }
   return lastSection;

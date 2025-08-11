@@ -8,9 +8,15 @@ function getColunasAnteriores(position) {
       headers = JSON.parse(localStorage.getItem('tableHeaders' + t)) || [];
     } catch (e) { headers = []; }
     // Só soma se a tabela está ativada (checkbox Exibir)
-    const showTable = t === 3 ? localStorage.getItem('showTable3') === '1' :
-                      t === 4 ? localStorage.getItem('showTable4') === '1' :
-                      t === 5 ? localStorage.getItem('showTable5') === '1' : true;
+    const showMap = {
+      3: localStorage.getItem('showTable3') === '1',
+      4: localStorage.getItem('showTable4') === '1',
+      5: localStorage.getItem('showTable5') === '1',
+      6: localStorage.getItem('showTable6') === '1',
+      7: localStorage.getItem('showTable7') === '1',
+      8: localStorage.getItem('showTable8') === '1'
+    };
+    const showTable = t <= 2 ? true : !!showMap[t];
     if (showTable) {
       total += headers.filter(h => h.selected && h.text !== 'Discriminação').reduce((sum, h) => sum + (h.colspan || 1), 0);
     }
@@ -26,6 +32,7 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
   let lastSection = null;
 
   while (rowsProcessed < data.length) {
+    // Usa o título já numerado recebido
     const newA4Page = addNewPage(tableTitle, isSampleProfile);
 
     const table = document.createElement('table');
@@ -100,12 +107,24 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
       td.textContent = options;
       tr.appendChild(td);
 
+      const isTotalRow = (options?.toString().trim().toLowerCase() === 'total');
+
       let colIndex = colunasAnteriores + 1;
       selectedHeaders.forEach(header => {
         for (let i = 0; i < header.colspan; i++) {
           const value = row[colIndex];
           const td = document.createElement('td');
-          td.textContent = value !== undefined && value !== null ? value : '';
+          if (isTotalRow) {
+            const raw = value !== undefined && value !== null ? value.toString() : '';
+            const asNumber = raw !== '' && !isNaN(parseFloat(raw.replace(',', '.')))
+              ? parseFloat(raw.replace(',', '.'))
+              : null;
+            td.textContent = asNumber !== null
+              ? asNumber.toFixed(1).replace('.', ',')
+              : (value !== undefined && value !== null ? value : '');
+          } else {
+            td.textContent = value !== undefined && value !== null ? value : '';
+          }
           tr.appendChild(td);
           colIndex++;
         }
