@@ -123,7 +123,11 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
               ? asNumber.toFixed(1).replace('.', ',')
               : (value !== undefined && value !== null ? value : '');
           } else {
-            td.textContent = value !== undefined && value !== null ? value : '';
+            if (value !== undefined && value !== null && !isNaN(parseFloat(value))) {
+              td.textContent = parseFloat(value).toFixed(1).replace('.', ',');
+            } else {
+              td.textContent = value !== undefined && value !== null ? value : '';
+            }
           }
           tr.appendChild(td);
           colIndex++;
