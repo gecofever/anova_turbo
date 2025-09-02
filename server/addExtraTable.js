@@ -114,21 +114,40 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
         for (let i = 0; i < header.colspan; i++) {
           const value = row[colIndex];
           const td = document.createElement('td');
-          if (isTotalRow) {
+
+          let formattedValue = '';
+          if (isSampleProfile && rowIndex === 0) {
+            // Lógica para 'Absolutos' - sem casas decimais
+            formattedValue = value !== undefined && value !== null
+              ? (value === 0 ? '0' : Math.round(parseFloat(value.toString().replace(',', '.'))).toString())
+              : 'N/A';
+          } else if (isSampleProfile && rowIndex === 1) {
+            // Lógica para 'Percentuais' - com uma casa decimal
+            const factor = 10;
+            formattedValue = value !== undefined && value !== null
+              ? (value === 0 ? '0,0' : (Math.round((parseFloat(value.toString().replace(',', '.'))) * factor) / factor).toFixed(1).replace('.', ','))
+              : 'N/A';
+          } else if (isTotalRow) {
+            // Lógica para a linha 'Total'
             const raw = value !== undefined && value !== null ? value.toString() : '';
             const asNumber = raw !== '' && !isNaN(parseFloat(raw.replace(',', '.')))
               ? parseFloat(raw.replace(',', '.'))
               : null;
-            td.textContent = asNumber !== null
+            formattedValue = asNumber !== null
               ? asNumber.toFixed(1).replace('.', ',')
               : (value !== undefined && value !== null ? value : '');
           } else {
-            if (value !== undefined && value !== null && !isNaN(parseFloat(value))) {
-              td.textContent = parseFloat(value).toFixed(1).replace('.', ',');
+            // Lógica padrão para as outras linhas
+            const _value = value !== undefined && value !== null
+              ? (value === 0 ? '0,0' : value.toString().replace('.', ','))
+              : 'N/A';
+            if (!isNaN(parseFloat(_value.replace(',', '.')))) {
+              formattedValue = parseFloat(_value.replace(',', '.')).toFixed(1).replace('.', ',');
             } else {
-              td.textContent = value !== undefined && value !== null ? value : '';
+              formattedValue = _value;
             }
           }
+          td.textContent = formattedValue;
           tr.appendChild(td);
           colIndex++;
         }
