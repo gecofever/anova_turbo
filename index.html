@@ -68,6 +68,27 @@
     </section>
 
     <section class="container">
+      <div class="a4">
+        <h1
+          class="title-two"
+          contenteditable="true"
+        >PARAÍBA</h1>
+
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <button id="selectImageButton" class="invisible-button" style="margin-bottom: 15px;">Selecionar Imagem</button>
+          <input
+            type="file"
+            id="fileInputImage"
+            accept="image/*"
+            style="display:none"
+          >
+
+          <div id="imagePreview" style="text-align: center;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
       <div class="copyright">
         <span id="copyrightValue"
           >Pesquisa interna. Essa pesquisa não pode ser publicada ou divulgada.
@@ -285,7 +306,7 @@
         <h1 class="title-sample-profile">PERFIL DA AMOSTRA</h1>
 
         <div class="sample-profile">
-          <button id="sample-profile" type="button">Adicionar</button>
+          <button class="invisible-button" type="button">Adicionar</button>
           <section id="sampleProfileSection"></section>
         </div>
       </div>

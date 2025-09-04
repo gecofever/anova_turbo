@@ -16,7 +16,7 @@ const tableOptions = document.getElementById('table-options')
 const tableButton1 = document.getElementById('model1')
 const tableButton2 = document.getElementById('model2')
 const addSecondTableButton = document.getElementById('add-second-table')
-const sampleProfileButton = document.getElementById('sample-profile')
+const sampleProfileButton = document.getElementById('invisible-button')
 
 const tableHeaderSelector = document.getElementById('tableHeaderSelector');
 const tableHeaderNumber = document.getElementById('tableHeaderNumber');
@@ -31,6 +31,12 @@ const showTable5Checkbox = document.getElementById('show-table-5-config');
 const showTable6Checkbox = document.getElementById('show-table-6-config');
 const showTable7Checkbox = document.getElementById('show-table-7-config');
 const showTable8Checkbox = document.getElementById('show-table-8-config');
+
+// Conectar botão e input de imagem
+const selectImageButton = document.getElementById("selectImageButton");
+const fileInputImage = document.getElementById("fileInputImage");
+selectImageButton.addEventListener("click", () => fileInputImage.click());
+fileInputImage.addEventListener("change", previewImage);
 
 // Função para salvar o estado do checkbox
 function saveShowTable3State() {
@@ -550,6 +556,22 @@ export function addNewPage(tableTitle, isSampleProfile) {
   }
 
   return a4;
+}
+
+export function previewImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById("imagePreview");
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.innerHTML = `<img src="${e.target.result}"
+                             style="max-width:100%; border:1px solid #ccc;">`;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    preview.innerHTML = "";
+  }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
