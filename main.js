@@ -16,7 +16,7 @@ const tableOptions = document.getElementById('table-options')
 const tableButton1 = document.getElementById('model1')
 const tableButton2 = document.getElementById('model2')
 const addSecondTableButton = document.getElementById('add-second-table')
-const sampleProfileButton = document.getElementById('invisible-button')
+const sampleProfileButton = document.getElementById('sample-profile')
 
 const tableHeaderSelector = document.getElementById('tableHeaderSelector');
 const tableHeaderNumber = document.getElementById('tableHeaderNumber');
