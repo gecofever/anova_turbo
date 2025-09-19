@@ -171,24 +171,7 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
     }
 
     newA4Page.appendChild(table);
-
-    // Criação do section para a tabela
-    const section = document.createElement('section');
-    section.classList.add('container');
-    section.appendChild(newA4Page);
-
-    const sampleProfileDiv = document.querySelector('.sample-profile');
-    const tableSection = document.getElementById('tableSection');
-
-    if (isSampleProfile) {
-      sampleProfileDiv.appendChild(section);
-    } else if (referenceSection && referenceSection.parentNode && !section.contains(referenceSection)) {
-      referenceSection.parentNode.insertBefore(section, referenceSection.nextSibling);
-    } else {
-      tableSection.appendChild(section);
-    }
-
-    lastSection = section;
+    lastSection = newA4Page.closest('section');
     rowsProcessed += maxRowsPerPage;
   }
   return lastSection;
