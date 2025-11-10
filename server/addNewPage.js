@@ -5,7 +5,7 @@ import { decrementTableCounter } from "./addFirstTable";
 
 let idInt = 0;
 
-export function addNewPage(tableTitle, isSampleProfile) {
+export function addNewPage(tableTitle, isSampleProfile, isChart) {
   const section = document.createElement("section");
   section.classList.add("container");
 
@@ -28,6 +28,9 @@ export function addNewPage(tableTitle, isSampleProfile) {
   inputTitle.setAttribute('contenteditable', 'True');
   inputTitle.classList.add('multiline-input-no-margin');
   inputTitle.classList.add('text-center');
+  if (isChart) {
+    inputTitle.classList.add('bold-text');
+  }
   inputTitle.innerText = tableTitle;
 
   a4.appendChild(inputTitle);

@@ -76,7 +76,7 @@ const addNewChart = (opcoes, pontos, title, type) => {
   const section = document.createElement("section");
   section.classList.add("container");
 
-  const a4 = addNewPage(title);
+  const a4 = addNewPage(title, false, true);
 
   a4.appendChild(divElement);
   a4.appendChild(buttonElement);

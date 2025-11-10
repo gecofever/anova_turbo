@@ -238,6 +238,10 @@ ul li {
   opacity: 1;
 }
 
+.bold-text {
+  font-weight: bold;
+}
+
 .radio-button {
   display: flex;
   align-items: center;
