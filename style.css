@@ -407,6 +407,9 @@ ul li {
   height: auto;
   overflow-y: auto;
   resize: none;
+  width: 90%;
+  display: block;
+  margin: 0 auto;
 }
 
 .text-center {
