@@ -21,6 +21,9 @@ const sampleProfileButton = document.getElementById('sample-profile')
 const tableHeaderSelector = document.getElementById('tableHeaderSelector');
 const tableHeaderNumber = document.getElementById('tableHeaderNumber');
 
+// Adicionar lógica para mostrar/ocultar Tabela 2 conforme checkbox (e desativada por padrão)
+const showTable2Checkbox = document.getElementById('show-table-2-config');
+
 // Adicionar lógica para mostrar/ocultar Tabela 3 conforme checkbox
 const showTable3Checkbox = document.getElementById('show-table-3-config');
 const headersSection3 = document.querySelector('.table-headers-section:nth-child(4)');
@@ -37,6 +40,21 @@ const selectImageButton = document.getElementById("selectImageButton");
 const fileInputImage = document.getElementById("fileInputImage");
 selectImageButton.addEventListener("click", () => fileInputImage.click());
 fileInputImage.addEventListener("change", previewImage);
+
+function saveShowTable2State() {
+  localStorage.setItem('showTable2', showTable2Checkbox.checked ? '1' : '0');
+}
+
+function restoreShowTable2State() {
+  const state = localStorage.getItem('showTable2');
+  showTable2Checkbox.checked = state === '1';
+  document.getElementById('headers-container-2').style.display = showTable2Checkbox.checked ? 'block' : 'none';
+}
+
+showTable2Checkbox.addEventListener('change', () => {
+  saveShowTable2State();
+  document.getElementById('headers-container-2').style.display = showTable2Checkbox.checked ? 'block' : 'none';
+});
 
 // Função para salvar o estado do checkbox
 function saveShowTable3State() {
@@ -58,6 +76,7 @@ showTable3Checkbox.addEventListener('change', () => {
 });
 
 // Restaurar ao abrir o formulário
+restoreShowTable2State();
 restoreShowTable3State();
 
 // Função para salvar o estado do checkbox
@@ -130,6 +149,7 @@ restoreShowTable8State();
 // Ao salvar, também salva o estado dos novos checkboxes
 saveChangesButton.addEventListener('click', () => {
   saveAllTableHeaders();
+  saveShowTable2State();
   saveShowTable3State();
   saveShowTable4State();
   saveShowTable5State();
@@ -172,6 +192,11 @@ function getNumberOfColumnsFromHeaders() {
   ];
   const valuesArray = [];
   containers.forEach(id => {
+    // Se a Tabela 2 estiver desativada, não conta colunas e impede a geração dela.
+    if (id === 'headers-container-2' && localStorage.getItem('showTable2') !== '1') {
+      valuesArray.push(0);
+      return;
+    }
     const inputs = document.querySelectorAll(`#${id} .header-colspan`);
     let sum = 0;
     inputs.forEach(input => {
@@ -577,4 +602,3 @@ export function previewImage(event) {
 window.addEventListener('DOMContentLoaded', () => {
   saveChanges();
 });
-
